@@ -1,0 +1,818 @@
+@use "../../styles/variables" as *;
+
+.irisInterface {
+	width: 100vw;
+	height: 100vh;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	background: radial-gradient(
+			circle at 20% 80%,
+			rgba(255, 145, 77, 0.05) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 80% 20%,
+			rgba(0, 217, 255, 0.03) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 40% 40%,
+			rgba(255, 107, 53, 0.02) 0%,
+			transparent 50%
+		),
+		#000;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+	// Mejor contraste para legibilidad
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.3);
+		pointer-events: none;
+		z-index: 0;
+		opacity: 0;
+		transition: opacity 0.5s ease;
+	}
+
+	&.recording {
+		background: radial-gradient(
+				circle at 50% 100%,
+				rgba(255, 140, 0, 0.15) 0%,
+				transparent 70%
+			),
+			radial-gradient(
+				circle at 20% 80%,
+				rgba(255, 165, 0, 0.08) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 80% 20%,
+				rgba(255, 215, 0, 0.06) 0%,
+				transparent 50%
+			),
+			linear-gradient(to bottom, #000 0%, rgba(15, 15, 15, 0.95) 100%);
+
+		&::before {
+			opacity: 0.2;
+		}
+	}
+
+	&.processing {
+		background: radial-gradient(
+				circle at 50% 50%,
+				rgba(0, 150, 255, 0.1) 0%,
+				transparent 70%
+			),
+			radial-gradient(
+				circle at 30% 70%,
+				rgba(100, 200, 255, 0.05) 0%,
+				transparent 50%
+			),
+			#000;
+	}
+
+	&.transitioning {
+		pointer-events: none;
+
+		* {
+			transition-duration: 0.6s !important;
+		}
+	}
+
+	// Mood-based background variations
+	&.mood-happy {
+		background: radial-gradient(
+				circle at 30% 70%,
+				rgba(255, 215, 0, 0.08) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 70% 30%,
+				rgba(255, 165, 0, 0.06) 0%,
+				transparent 50%
+			),
+			#000;
+	}
+
+	&.mood-supportive {
+		background: radial-gradient(
+				circle at 40% 60%,
+				rgba(0, 191, 255, 0.08) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 60% 40%,
+				rgba(135, 206, 250, 0.06) 0%,
+				transparent 50%
+			),
+			#000;
+	}
+
+	&.mood-excited {
+		background: radial-gradient(
+				circle at 50% 20%,
+				rgba(255, 69, 0, 0.1) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 20% 80%,
+				rgba(255, 140, 0, 0.08) 0%,
+				transparent 50%
+			),
+			#000;
+	}
+
+	&.mood-calm {
+		background: radial-gradient(
+				circle at 25% 75%,
+				rgba(147, 112, 219, 0.06) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 75% 25%,
+				rgba(106, 90, 205, 0.04) 0%,
+				transparent 50%
+			),
+			#000;
+	}
+}
+
+// Status Indicator
+.statusIndicator {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	padding: 8px 16px;
+	border-radius: 20px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	z-index: 100;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	animation: slideDown 0.3s ease-out;
+}
+
+.statusDot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #00d9ff;
+	animation: pulse 2s ease-in-out infinite;
+} // Header
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 60px 24px 20px;
+	position: relative;
+	z-index: 10;
+}
+
+.title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0;
+	letter-spacing: -0.02em;
+}
+
+.menuButton {
+	background: none;
+	border: none;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+
+	span {
+		width: 100%;
+		height: 2px;
+		background: #fff;
+		border-radius: 1px;
+		transition: all 0.3s ease;
+	}
+
+	&:hover span {
+		background: $primary-orange;
+	}
+}
+
+// Header Controls for Recording State
+.headerControls {
+	display: flex;
+	gap: 12px;
+}
+
+.headerButton {
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: rgba(255, 255, 255, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+
+	&:hover:not(:disabled) {
+		background: rgba(255, 255, 255, 0.2);
+		color: rgba(255, 255, 255, 0.9);
+		transform: scale(1.05);
+	}
+
+	&:active:not(:disabled) {
+		transform: scale(0.95);
+	}
+
+	&.active {
+		background: rgba(255, 145, 77, 0.3);
+		border-color: rgba(255, 145, 77, 0.6);
+		color: #ff914d;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			right: -2px;
+			bottom: -2px;
+			border-radius: 22px;
+			background: linear-gradient(
+				45deg,
+				rgba(255, 145, 77, 0.3),
+				rgba(255, 119, 95, 0.3)
+			);
+			z-index: -1;
+			animation: activeGlow 2s ease-in-out infinite;
+		}
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+		transform: none !important;
+	}
+}
+
+.endButton {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 20px;
+	color: #fff;
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover:not(:disabled) {
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+// Recording Status in Header
+.recordingStatus {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.recordingText {
+	color: #ff914d;
+	font-size: 0.875rem;
+	font-weight: 500;
+	position: relative;
+
+	&::before {
+		content: "";
+		width: 6px;
+		height: 6px;
+		background: #ff914d;
+		border-radius: 50%;
+		position: absolute;
+		left: -12px;
+		top: 50%;
+		transform: translateY(-50%);
+		animation: pulse 2s ease-in-out infinite;
+	}
+}
+
+.processingText {
+	color: #00d9ff;
+	font-size: 0.875rem;
+	font-weight: 500;
+	position: relative;
+
+	&::after {
+		content: "";
+		width: 12px;
+		height: 12px;
+		border: 2px solid #00d9ff;
+		border-top: 2px solid transparent;
+		border-radius: 50%;
+		position: absolute;
+		right: -20px;
+		top: 50%;
+		transform: translateY(-50%);
+		animation: spin 1s linear infinite;
+	}
+} // Main Content
+.mainContent {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+	padding: 20px;
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.chatSection {
+	width: 100%;
+	height: 100%;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+// Central Orb
+.orbContainer {
+	position: relative;
+	margin-bottom: 60px;
+}
+
+.centralOrb {
+	position: relative;
+	width: 120px;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+	&:hover {
+		transform: scale(1.05);
+	}
+
+	&.pressed {
+		transform: scale(0.95);
+	}
+
+	&.listening {
+		animation: breathe 2s ease-in-out infinite;
+
+		.orbCore {
+			box-shadow: 0 0 40px rgba(255, 215, 0, 0.8),
+				0 0 80px rgba(255, 165, 0, 0.6), 0 0 120px rgba(255, 140, 0, 0.4),
+				inset 0 2px 8px rgba(255, 255, 255, 0.4),
+				inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.orbGlow {
+			animation: pulse 1.5s ease-in-out infinite;
+		}
+
+		.orbPulse {
+			animation: ripple 2s ease-out infinite;
+		}
+	}
+}
+
+.orbCore {
+	width: 80px;
+	height: 80px;
+	background: radial-gradient(
+		circle at 30% 30%,
+		#ffd700 0%,
+		#ffa500 30%,
+		#ff8c00 60%,
+		#ff6b35 100%
+	);
+	border-radius: 50%;
+	position: relative;
+	z-index: 3;
+	box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 165, 0, 0.4),
+		0 0 90px rgba(255, 140, 0, 0.2), inset 0 2px 8px rgba(255, 255, 255, 0.3),
+		inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 15%;
+		left: 25%;
+		width: 20px;
+		height: 15px;
+		background: radial-gradient(
+			ellipse,
+			rgba(255, 255, 255, 0.8) 0%,
+			transparent 70%
+		);
+		border-radius: 50%;
+		filter: blur(1px);
+	}
+}
+
+.orbGlow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 160px;
+	height: 160px;
+	background: radial-gradient(
+		circle,
+		rgba(255, 215, 0, 0.3) 0%,
+		rgba(255, 165, 0, 0.2) 40%,
+		rgba(255, 140, 0, 0.1) 70%,
+		transparent 100%
+	);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	animation: pulse 3s ease-in-out infinite;
+}
+
+.orbPulse {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	height: 200px;
+	border: 2px solid rgba(255, 215, 0, 0.3);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 0;
+	animation: ripple 4s ease-out infinite;
+}
+
+// Description
+.description {
+	max-width: 320px;
+	text-align: center;
+
+	p {
+		font-size: 1rem;
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.8);
+		margin: 0;
+		font-weight: 400;
+	}
+}
+
+// Recording State Elements
+.recordingOrbs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.orb {
+	position: absolute;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle at 30% 30%,
+		#ffd700 0%,
+		#ffa500 40%,
+		#ff8c00 70%,
+		#ff6b35 100%
+	);
+	box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 165, 0, 0.4);
+	animation: orbFloat 3s ease-in-out infinite;
+
+	&.topOrb {
+		width: 60px;
+		height: 60px;
+		top: 20%;
+		left: 50%;
+		transform: translateX(-50%);
+		animation-delay: 0s;
+	}
+
+	&.centerOrb {
+		width: 80px;
+		height: 80px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		animation-delay: 1s;
+	}
+
+	&.bottomOrb {
+		width: 50px;
+		height: 50px;
+		bottom: 30%;
+		right: 20%;
+		animation-delay: 2s;
+		background: radial-gradient(
+			circle at 30% 30%,
+			#ff7759 0%,
+			#ff6384 40%,
+			#ff4a6b 70%,
+			#e63946 100%
+		);
+	}
+}
+
+.audioVisualizer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+
+.userAvatar {
+	position: absolute;
+	bottom: 40%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 5;
+} // Action Buttons
+.actionButtons {
+	display: flex;
+	gap: 16px;
+	padding: 0 24px 32px;
+	justify-content: center;
+}
+
+.actionButton {
+	flex: 1;
+	max-width: 160px;
+	height: 56px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 28px;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	backdrop-filter: blur(10px);
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 215, 0, 0.5);
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+	}
+
+	&.active {
+		background: rgba(255, 215, 0, 0.2);
+		border-color: rgba(255, 215, 0, 0.6);
+		color: #ffd700;
+
+		.buttonIcon {
+			transform: scale(1.1);
+		}
+	}
+}
+
+.buttonIcon {
+	transition: transform 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttonText {
+	font-weight: 500;
+}
+
+// Bottom Mic Button for Recording State
+.bottomMicContainer {
+	display: flex;
+	justify-content: center;
+	padding: 32px 24px;
+}
+
+.bottomMicButton {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	color: rgba(255, 255, 255, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	backdrop-filter: blur(10px);
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 145, 77, 0.5);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+	}
+
+	&.active {
+		background: rgba(255, 145, 77, 0.2);
+		border-color: rgba(255, 145, 77, 0.6);
+		color: #ff914d;
+		animation: micPulse 2s ease-in-out infinite;
+	}
+} // Bottom Navigation
+.bottomNav {
+	display: flex;
+	background: rgba(0, 0, 0, 0.8);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 8px 0 34px; // Extra padding for safe area
+	backdrop-filter: blur(20px);
+}
+
+.navItem {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	padding: 8px;
+	background: none;
+	border: none;
+	color: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		color: rgba(255, 255, 255, 0.8);
+		transform: translateY(-1px);
+	}
+
+	&.active {
+		color: #00d9ff;
+
+		.navIcon {
+			transform: scale(1.1);
+		}
+	}
+}
+
+.navIcon {
+	transition: transform 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.navLabel {
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+// Animations
+@keyframes breathe {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.08);
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 0.6;
+		transform: translate(-50%, -50%) scale(1);
+	}
+	50% {
+		opacity: 0.8;
+		transform: translate(-50%, -50%) scale(1.1);
+	}
+}
+
+@keyframes ripple {
+	0% {
+		opacity: 0.8;
+		transform: translate(-50%, -50%) scale(0.8);
+	}
+	100% {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(1.5);
+	}
+}
+
+@keyframes orbFloat {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-10px) scale(1.05);
+	}
+}
+
+@keyframes micPulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(255, 145, 77, 0.7);
+	}
+	50% {
+		box-shadow: 0 0 0 20px rgba(255, 145, 77, 0);
+	}
+} // Mobile optimizations
+@media (max-width: 480px) {
+	.header {
+		padding: 50px 20px 16px;
+	}
+
+	.mainContent {
+		padding: 20px 20px 40px;
+	}
+
+	.centralOrb {
+		width: 100px;
+		height: 100px;
+	}
+
+	.orbCore {
+		width: 70px;
+		height: 70px;
+	}
+
+	.description {
+		max-width: 280px;
+
+		p {
+			font-size: 0.9rem;
+		}
+	}
+
+	.actionButtons {
+		padding: 0 20px 24px;
+		gap: 12px;
+	}
+
+	.actionButton {
+		height: 52px;
+		font-size: 0.9rem;
+	}
+}
+
+// Dark theme enhancements
+.irisInterface {
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(
+				circle at 20% 80%,
+				rgba(255, 215, 0, 0.08) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 80% 20%,
+				rgba(0, 217, 255, 0.06) 0%,
+				transparent 50%
+			),
+			radial-gradient(
+				circle at 40% 40%,
+				rgba(255, 107, 53, 0.04) 0%,
+				transparent 50%
+			);
+		pointer-events: none;
+		z-index: 0;
+	}
+}

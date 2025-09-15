@@ -1,0 +1,64 @@
+.header {
+	padding: 8px 16px;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 44px;
+	margin-bottom: 8px;
+}
+
+.leftControls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.centerLogo {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.logoS {
+	color: #00ff88;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.rightControls {
+	display: flex;
+	align-items: center;
+}
+
+.endButton {
+	background: transparent;
+	color: #00ff88;
+	border: 1px solid #00ff88;
+	border-radius: 16px;
+	padding: 8px 16px;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: #00ff88;
+		color: #000;
+		box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+	}
+}
+
+.subtitle {
+	text-align: center;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 14px;
+	padding: 4px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,259 @@
+@use "../../styles/variables" as *;
+
+.animatedButton {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	border-radius: 12px;
+	font-family: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	outline: none;
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transform-origin: center;
+
+	&:focus-visible {
+		outline: 2px solid rgba(255, 145, 77, 0.5);
+		outline-offset: 2px;
+	}
+
+	&:active {
+		transform: scale(0.96);
+	}
+
+	&.pressed {
+		transform: scale(0.94);
+	}
+}
+
+// Variantes
+.primary {
+	background: linear-gradient(135deg, #ff914d 0%, #ff7759 50%, #ff6384 100%);
+	color: white;
+	box-shadow: 0 4px 15px rgba(255, 145, 77, 0.3),
+		0 2px 8px rgba(255, 145, 77, 0.2);
+
+	&:hover:not(.disabled):not(.loading) {
+		background: linear-gradient(135deg, #ff8234 0%, #ff5e40 50%, #ff4a6b 100%);
+		box-shadow: 0 6px 20px rgba(255, 145, 77, 0.4),
+			0 3px 12px rgba(255, 145, 77, 0.3);
+		transform: translateY(-2px);
+	}
+}
+
+.secondary {
+	background: linear-gradient(135deg, #ffa366 0%, #ffab7a 50%, #ffb68a 100%);
+	color: #333;
+	box-shadow: 0 4px 15px rgba(255, 163, 102, 0.25),
+		0 2px 8px rgba(255, 163, 102, 0.15);
+
+	&:hover:not(.disabled):not(.loading) {
+		background: linear-gradient(135deg, #ff954d 0%, #ffa066 50%, #ffab7a 100%);
+		box-shadow: 0 6px 20px rgba(255, 163, 102, 0.35),
+			0 3px 12px rgba(255, 163, 102, 0.25);
+		transform: translateY(-2px);
+	}
+}
+
+.outline {
+	background: rgba(255, 145, 77, 0.1);
+	color: #ff914d;
+	border: 2px solid rgba(255, 145, 77, 0.3);
+	box-shadow: 0 2px 8px rgba(255, 145, 77, 0.1);
+
+	&:hover:not(.disabled):not(.loading) {
+		background: rgba(255, 145, 77, 0.2);
+		border-color: rgba(255, 145, 77, 0.5);
+		box-shadow: 0 4px 15px rgba(255, 145, 77, 0.2),
+			0 2px 8px rgba(255, 145, 77, 0.15);
+		transform: translateY(-1px);
+	}
+}
+
+// Tamaños
+.small {
+	padding: 8px 16px;
+	font-size: 0.875rem;
+	min-height: 36px;
+	border-radius: 8px;
+}
+
+.medium {
+	padding: 12px 24px;
+	font-size: 1rem;
+	min-height: 44px;
+	border-radius: 10px;
+}
+
+.large {
+	padding: 16px 32px;
+	font-size: 1.125rem;
+	min-height: 52px;
+	border-radius: 12px;
+}
+
+// Estados
+.loading {
+	pointer-events: none;
+
+	.text {
+		opacity: 0.7;
+	}
+}
+
+.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+
+	&:hover {
+		transform: none !important;
+		box-shadow: none !important;
+	}
+}
+
+// Contenido del botón
+.buttonContent {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	z-index: 2;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2em;
+}
+
+.text {
+	transition: opacity 0.3s ease;
+}
+
+.loadingSpinner {
+	position: absolute;
+	left: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.spinner {
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top: 2px solid currentColor;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+// Efectos
+.rippleContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border-radius: inherit;
+}
+
+.ripple {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.4);
+	transform: translate(-50%, -50%);
+	animation: rippleExpand 0.6s ease-out;
+}
+
+.glowEffect {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: inherit;
+	border-radius: inherit;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	filter: blur(8px);
+	z-index: -1;
+}
+
+.animatedButton:hover:not(.disabled):not(.loading) .glowEffect {
+	opacity: 0.6;
+}
+
+.shineEffect {
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	transition: left 0.6s ease;
+}
+
+.animatedButton:hover:not(.disabled):not(.loading) .shineEffect {
+	left: 100%;
+}
+
+// Animaciones
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rippleExpand {
+	0% {
+		width: 0;
+		height: 0;
+		opacity: 0.8;
+	}
+	100% {
+		width: 200px;
+		height: 200px;
+		opacity: 0;
+	}
+}
+
+// Efectos especiales para variante primaria
+.primary {
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			transparent 50%
+		);
+		border-radius: inherit;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:hover:not(.disabled):not(.loading)::before {
+		opacity: 1;
+	}
+}

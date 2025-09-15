@@ -1,0 +1,47 @@
+// Variables globales para colores y gradientes
+$primary-orange: #ff914d;
+$primary-coral: #ff7759;
+$primary-pink: #ff6384;
+$secondary-orange: #ffa366;
+$secondary-peach: #ffab7a;
+$accent-gold: #ffd700;
+$accent-amber: #ffbf69;
+
+// Gradientes principales
+$gradient-primary: linear-gradient(
+	135deg,
+	#{$primary-orange} 0%,
+	#{$primary-coral} 50%,
+	#{$primary-pink} 100%
+);
+$gradient-secondary: linear-gradient(
+	135deg,
+	#{$secondary-orange} 0%,
+	#{$secondary-peach} 50%,
+	#{$accent-amber} 100%
+);
+$gradient-warm: radial-gradient(
+	circle,
+	#{$primary-orange} 0%,
+	#{$primary-coral} 60%,
+	#222 100%
+);
+
+// Colores de fondo
+$bg-dark: rgba(34, 34, 34, 0.95);
+$bg-glass: rgba(34, 34, 34, 0.8);
+$bg-overlay: rgba(255, 145, 77, 0.1);
+
+// Sombras
+$shadow-soft: 0 4px 15px rgba(255, 145, 77, 0.3);
+$shadow-medium: 0 6px 20px rgba(255, 145, 77, 0.4);
+$shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+// Transiciones
+$transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$transition-fast: 0.15s ease;
+
+// Bordes redondeados
+$border-radius-small: 8px;
+$border-radius-medium: 12px;
+$border-radius-large: 24px;

@@ -1,0 +1,226 @@
+@use "../../styles/variables" as *;
+
+.hoverCardContainer {
+	position: relative;
+	display: inline-block;
+}
+
+.hoverCard {
+	position: absolute;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(10px);
+	animation: cardAppear 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+	pointer-events: none;
+	max-width: 300px;
+	min-width: 200px;
+}
+
+.cardContent {
+	background: rgba(34, 34, 34, 0.95);
+	border: 1px solid rgba(255, 145, 77, 0.2);
+	border-radius: 12px;
+	padding: 16px;
+	backdrop-filter: blur(20px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(255, 145, 77, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	position: relative;
+	overflow: hidden;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 145, 77, 0.05) 0%,
+			rgba(255, 119, 95, 0.03) 50%,
+			transparent 100%
+		);
+		pointer-events: none;
+	}
+}
+
+.imageContainer {
+	margin-bottom: 12px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.cardImage {
+	width: 100%;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 6px;
+}
+
+.cardTitle {
+	color: #ff914d;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 0 0 8px 0;
+	line-height: 1.3;
+}
+
+.cardDescription {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.customContent {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+// Posiciones
+.top {
+	bottom: calc(100% + 12px);
+	left: 50%;
+	transform: translateX(-50%) translateY(10px);
+
+	.arrow {
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-top: 8px solid rgba(34, 34, 34, 0.95);
+	}
+}
+
+.bottom {
+	top: calc(100% + 12px);
+	left: 50%;
+	transform: translateX(-50%) translateY(-10px);
+
+	.arrow {
+		bottom: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 8px solid rgba(34, 34, 34, 0.95);
+	}
+}
+
+.left {
+	top: 50%;
+	right: calc(100% + 12px);
+	transform: translateY(-50%) translateX(10px);
+
+	.arrow {
+		top: 50%;
+		left: 100%;
+		transform: translateY(-50%);
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-left: 8px solid rgba(34, 34, 34, 0.95);
+	}
+}
+
+.right {
+	top: 50%;
+	left: calc(100% + 12px);
+	transform: translateY(-50%) translateX(-10px);
+
+	.arrow {
+		top: 50%;
+		right: 100%;
+		transform: translateY(-50%);
+		border-top: 8px solid transparent;
+		border-bottom: 8px solid transparent;
+		border-right: 8px solid rgba(34, 34, 34, 0.95);
+	}
+}
+
+.arrow {
+	position: absolute;
+	width: 0;
+	height: 0;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+// Animaciones
+@keyframes cardAppear {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(-50%) translateY(10px) scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0) scale(1);
+	}
+}
+
+// Variaciones para diferentes posiciones
+.bottom {
+	animation: cardAppearBottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.left {
+	animation: cardAppearLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.right {
+	animation: cardAppearRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes cardAppearBottom {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(-50%) translateY(-10px) scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0) scale(1);
+	}
+}
+
+@keyframes cardAppearLeft {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-50%) translateX(10px) scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(-50%) translateX(0) scale(1);
+	}
+}
+
+@keyframes cardAppearRight {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-50%) translateX(-10px) scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(-50%) translateX(0) scale(1);
+	}
+}
+
+// Efectos de hover en el contenido
+.cardContent {
+	transition: all 0.3s ease;
+
+	&:hover {
+		border-color: rgba(255, 145, 77, 0.4);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+			0 6px 20px rgba(255, 145, 77, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
+	}
+}
