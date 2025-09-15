@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # Development service
+  frontend-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - dev
+
+  # Storybook development service
+  storybook-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "6006:6006"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["yarn", "storybook", "--port", "6006", "--host", "0.0.0.0"]
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - dev
+
+  # Production service
+  frontend-prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    profiles:
+      - prod
+
+  # Build service (for CI/CD)
+  frontend-build:
+    build:
+      context: .
+      target: build
+    volumes:
+      - ./dist:/app/dist
+    profiles:
+      - build
+
+volumes:
+  node_modules:

@@ -6,3 +6,6 @@ dist/
 
 .history
 .vscode/
+
+*storybook.log
+storybook-static

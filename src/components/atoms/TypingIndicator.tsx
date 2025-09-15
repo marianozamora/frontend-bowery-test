@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./TypingIndicator.module.scss";
 
-const TypingIndicator: React.FC = () => (
+const TypingIndicator: React.FC = memo(() => (
 	<div
 		className={styles.typing}
 		aria-label='El asistente está escribiendo'
@@ -11,6 +11,8 @@ const TypingIndicator: React.FC = () => (
 		<span className={styles.dot}></span>
 		<span className={styles.dot}></span>
 	</div>
-);
+));
+
+TypingIndicator.displayName = "TypingIndicator";
 
 export default TypingIndicator;

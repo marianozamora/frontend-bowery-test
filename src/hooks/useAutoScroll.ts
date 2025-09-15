@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from "react";
+import { useEffect, useRef, RefObject, useCallback } from "react";
 
 interface UseAutoScrollProps {
 	dependency?: any; // Variable que dispara el scroll
@@ -13,17 +13,22 @@ export const useAutoScroll = <T extends HTMLElement>({
 }: UseAutoScrollProps = {}) => {
 	const ref = useRef<T>(null);
 
-	useEffect(() => {
-		if (!enabled || !ref.current) return;
+	// Memoize scroll function to prevent unnecessary re-renders
+	const scrollToBottom = useCallback(() => {
+		if (!ref.current) return;
 
 		const element = ref.current;
-
-		// Scroll al final del contenedor
 		element.scrollTo({
 			top: element.scrollHeight,
 			behavior,
 		});
-	}, [dependency, enabled, behavior]);
+	}, [behavior]);
+
+	useEffect(() => {
+		if (!enabled) return;
+
+		scrollToBottom();
+	}, [dependency, enabled, scrollToBottom]);
 
 	return ref;
 };

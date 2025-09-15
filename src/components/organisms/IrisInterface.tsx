@@ -7,8 +7,6 @@ import {
 	IrisIcon,
 	TypeIcon,
 } from "../atoms/Icons";
-import AudioVisualizer from "../atoms/AudioVisualizer";
-import UserAvatar from "../atoms/UserAvatar";
 import ChatContainer from "./ChatContainer";
 import styles from "./IrisInterface.module.scss";
 
@@ -176,12 +174,6 @@ const IrisInterface: React.FC = () => {
 							<div className={`${styles.orb} ${styles.centerOrb}`}></div>
 							<div className={`${styles.orb} ${styles.bottomOrb}`}></div>
 						</div>
-
-						{/* Audio Visualizer */}
-						<AudioVisualizer
-							isActive={isListening}
-							className={styles.audioVisualizer}
-						/>
 					</>
 				) : (
 					<>
