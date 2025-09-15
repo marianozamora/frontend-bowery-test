@@ -1,5 +1,4 @@
-import React from "react";
-import IrisInterface from "./components/organisms/IrisInterface";
+import { IrisInterface } from "./globals";
 
 function App() {
 	return <IrisInterface />;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ChatContainer from "./ChatContainer";
+import { ChatContainer } from "../../globals";
 
 const meta: Meta<typeof ChatContainer> = {
 	title: "Organisms/ChatContainer",

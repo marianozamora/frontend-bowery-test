@@ -1,46 +1,64 @@
-@use "../../styles/variables" as *;
-
 .animatedButton {
+	// Component Variables
+	--button-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	--button-radius-sm: 0.5rem;
+	--button-radius-md: 0.625rem;
+	--button-radius-lg: 0.75rem;
+	--button-font-weight: 600;
+	--button-outline-width: 0.125rem;
+	--button-outline-offset: 0.125rem;
+	--button-scale-active: 0.96;
+	--button-scale-pressed: 0.94;
+	--button-hover-translate: -0.125rem;
+
+	// Colors
+	--button-primary-start: #ff914d;
+	--button-primary-mid: #ff7759;
+	--button-primary-end: #ff6384;
+	--button-primary-hover-start: #ff8234;
+	--button-primary-hover-mid: #ff5e40;
+	--button-primary-hover-end: #ff4a6b;
+
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	border: none;
-	border-radius: 12px;
+	border-radius: var(--button-radius-lg);
 	font-family: inherit;
-	font-weight: 600;
+	font-weight: var(--button-font-weight);
 	cursor: pointer;
 	outline: none;
 	overflow: hidden;
-	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transition: all var(--button-transition);
 	transform-origin: center;
 
 	&:focus-visible {
-		outline: 2px solid rgba(255, 145, 77, 0.5);
-		outline-offset: 2px;
+		outline: var(--button-outline-width) solid rgba(255, 145, 77, 0.5);
+		outline-offset: var(--button-outline-offset);
 	}
 
 	&:active {
-		transform: scale(0.96);
+		transform: scale(var(--button-scale-active));
 	}
 
 	&.pressed {
-		transform: scale(0.94);
+		transform: scale(var(--button-scale-pressed));
 	}
 }
 
 // Variantes
 .primary {
-	background: linear-gradient(135deg, #ff914d 0%, #ff7759 50%, #ff6384 100%);
+	background: linear-gradient(135deg, var(--button-primary-start) 0%, var(--button-primary-mid) 50%, var(--button-primary-end) 100%);
 	color: white;
-	box-shadow: 0 4px 15px rgba(255, 145, 77, 0.3),
-		0 2px 8px rgba(255, 145, 77, 0.2);
+	box-shadow: 0 0.25rem 0.9375rem rgba(255, 145, 77, 0.3),
+		0 0.125rem 0.5rem rgba(255, 145, 77, 0.2);
 
 	&:hover:not(.disabled):not(.loading) {
-		background: linear-gradient(135deg, #ff8234 0%, #ff5e40 50%, #ff4a6b 100%);
-		box-shadow: 0 6px 20px rgba(255, 145, 77, 0.4),
-			0 3px 12px rgba(255, 145, 77, 0.3);
-		transform: translateY(-2px);
+		background: linear-gradient(135deg, var(--button-primary-hover-start) 0%, var(--button-primary-hover-mid) 50%, var(--button-primary-hover-end) 100%);
+		box-shadow: 0 0.375rem 1.25rem rgba(255, 145, 77, 0.4),
+			0 0.1875rem 0.75rem rgba(255, 145, 77, 0.3);
+		transform: translateY(var(--button-hover-translate));
 	}
 }
 
@@ -75,24 +93,24 @@
 
 // Tamaños
 .small {
-	padding: 8px 16px;
+	padding: 0.5rem 1rem;
 	font-size: 0.875rem;
-	min-height: 36px;
-	border-radius: 8px;
+	min-height: 2.25rem;
+	border-radius: var(--button-radius-sm);
 }
 
 .medium {
-	padding: 12px 24px;
+	padding: 0.75rem 1.5rem;
 	font-size: 1rem;
-	min-height: 44px;
-	border-radius: 10px;
+	min-height: 2.75rem;
+	border-radius: var(--button-radius-md);
 }
 
 .large {
-	padding: 16px 32px;
+	padding: 1rem 2rem;
 	font-size: 1.125rem;
-	min-height: 52px;
-	border-radius: 12px;
+	min-height: 3.25rem;
+	border-radius: var(--button-radius-lg);
 }
 
 // Estados
@@ -121,7 +139,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 8px;
+	gap: 0.5rem;
 	z-index: 2;
 }
 
@@ -138,17 +156,17 @@
 
 .loadingSpinner {
 	position: absolute;
-	left: 12px;
+	left: 0.75rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .spinner {
-	width: 16px;
-	height: 16px;
-	border: 2px solid rgba(255, 255, 255, 0.3);
-	border-top: 2px solid currentColor;
+	width: 1rem;
+	height: 1rem;
+	border: 0.125rem solid rgba(255, 255, 255, 0.3);
+	border-top: 0.125rem solid currentColor;
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
 }
@@ -183,8 +201,8 @@
 	background: inherit;
 	border-radius: inherit;
 	opacity: 0;
-	transition: opacity 0.3s ease;
-	filter: blur(8px);
+	transition: opacity var(--button-transition);
+	filter: blur(0.5rem);
 	z-index: -1;
 }
 
@@ -228,8 +246,8 @@
 		opacity: 0.8;
 	}
 	100% {
-		width: 200px;
-		height: 200px;
+		width: 12.5rem;
+		height: 12.5rem;
 		opacity: 0;
 	}
 }

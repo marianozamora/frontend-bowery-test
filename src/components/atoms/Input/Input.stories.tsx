@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import Input from "./Input";
+import { Input } from "../../../globals";
 
 const meta: Meta<typeof Input> = {
 	title: "Atoms/Input",

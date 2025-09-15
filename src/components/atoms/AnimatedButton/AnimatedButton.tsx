@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./AnimatedButton.module.scss";
 
 interface AnimatedButtonProps {
@@ -22,18 +22,15 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 	icon,
 	className = "",
 }) => {
-	const [isPressed, setIsPressed] = useState(false);
 	const [ripples, setRipples] = useState<
 		Array<{ x: number; y: number; id: number }>
 	>([]);
 
 	const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-		setIsPressed(true);
-
 		// Crear efecto ripple
 		const rect = e.currentTarget.getBoundingClientRect();
-		const x = e.clientX - rect.left;
-		const y = e.clientY - rect.top;
+		const x = ((e.clientX - rect.left) / rect.width) * 100;
+		const y = ((e.clientY - rect.top) / rect.height) * 100;
 
 		const newRipple = {
 			x,
@@ -49,10 +46,6 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 		}, 600);
 	};
 
-	const handleMouseUp = () => {
-		setIsPressed(false);
-	};
-
 	const handleClick = () => {
 		if (!disabled && !loading && onClick) {
 			onClick();
@@ -63,7 +56,6 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 		styles.animatedButton,
 		styles[variant],
 		styles[size],
-		isPressed ? styles.pressed : "",
 		loading ? styles.loading : "",
 		disabled ? styles.disabled : "",
 		className,
@@ -75,8 +67,6 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 		<button
 			className={buttonClasses}
 			onMouseDown={handleMouseDown}
-			onMouseUp={handleMouseUp}
-			onMouseLeave={handleMouseUp}
 			onClick={handleClick}
 			disabled={disabled || loading}
 		>
@@ -97,16 +87,12 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 						key={ripple.id}
 						className={styles.ripple}
 						style={{
-							left: ripple.x,
-							top: ripple.y,
+							left: `${ripple.x}%`,
+							top: `${ripple.y}%`,
 						}}
 					/>
 				))}
 			</div>
-
-			{/* Efectos de brillo */}
-			<div className={styles.glowEffect} />
-			<div className={styles.shineEffect} />
 		</button>
 	);
 };

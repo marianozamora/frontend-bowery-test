@@ -1,47 +1,77 @@
-// Variables globales para colores y gradientes
-$primary-orange: #ff914d;
-$primary-coral: #ff7759;
-$primary-pink: #ff6384;
-$secondary-orange: #ffa366;
-$secondary-peach: #ffab7a;
-$accent-gold: #ffd700;
-$accent-amber: #ffbf69;
+:root {
+	// Color Variables
+	--color-primary-orange: #ff914d;
+	--color-primary-coral: #ff7759;
+	--color-primary-pink: #ff6384;
+	--color-secondary-orange: #ffa366;
+	--color-secondary-peach: #ffab7a;
+	--color-accent-gold: #ffd700;
+	--color-accent-amber: #ffbf69;
 
-// Gradientes principales
-$gradient-primary: linear-gradient(
-	135deg,
-	#{$primary-orange} 0%,
-	#{$primary-coral} 50%,
-	#{$primary-pink} 100%
-);
-$gradient-secondary: linear-gradient(
-	135deg,
-	#{$secondary-orange} 0%,
-	#{$secondary-peach} 50%,
-	#{$accent-amber} 100%
-);
-$gradient-warm: radial-gradient(
-	circle,
-	#{$primary-orange} 0%,
-	#{$primary-coral} 60%,
-	#222 100%
-);
+	// Background Variables
+	--bg-dark: rgba(34, 34, 34, 0.95);
+	--bg-glass: rgba(34, 34, 34, 0.8);
+	--bg-overlay: rgba(255, 145, 77, 0.1);
 
-// Colores de fondo
-$bg-dark: rgba(34, 34, 34, 0.95);
-$bg-glass: rgba(34, 34, 34, 0.8);
-$bg-overlay: rgba(255, 145, 77, 0.1);
+	// Shadow Variables (using rem)
+	--shadow-soft: 0 0.25rem 0.9375rem rgba(255, 145, 77, 0.3);
+	--shadow-medium: 0 0.375rem 1.25rem rgba(255, 145, 77, 0.4);
+	--shadow-strong: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
 
-// Sombras
-$shadow-soft: 0 4px 15px rgba(255, 145, 77, 0.3);
-$shadow-medium: 0 6px 20px rgba(255, 145, 77, 0.4);
-$shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.3);
+	// Transition Variables
+	--transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	--transition-fast: 0.15s ease;
 
-// Transiciones
-$transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$transition-fast: 0.15s ease;
+	// Border Radius Variables (using rem)
+	--border-radius-small: 0.5rem;
+	--border-radius-medium: 0.75rem;
+	--border-radius-large: 1.5rem;
 
-// Bordes redondeados
-$border-radius-small: 8px;
-$border-radius-medium: 12px;
-$border-radius-large: 24px;
+	// Gradient Variables
+	--gradient-primary: linear-gradient(
+		135deg,
+		var(--color-primary-orange) 0%,
+		var(--color-primary-coral) 50%,
+		var(--color-primary-pink) 100%
+	);
+	--gradient-secondary: linear-gradient(
+		135deg,
+		var(--color-secondary-orange) 0%,
+		var(--color-secondary-peach) 50%,
+		var(--color-accent-amber) 100%
+	);
+	--gradient-warm: radial-gradient(
+		circle,
+		var(--color-primary-orange) 0%,
+		var(--color-primary-coral) 60%,
+		#222 100%
+	);
+}
+
+// Legacy SCSS Variables for backwards compatibility
+$primary-orange: var(--color-primary-orange);
+$primary-coral: var(--color-primary-coral);
+$primary-pink: var(--color-primary-pink);
+$secondary-orange: var(--color-secondary-orange);
+$secondary-peach: var(--color-secondary-peach);
+$accent-gold: var(--color-accent-gold);
+$accent-amber: var(--color-accent-amber);
+
+$bg-dark: var(--bg-dark);
+$bg-glass: var(--bg-glass);
+$bg-overlay: var(--bg-overlay);
+
+$shadow-soft: var(--shadow-soft);
+$shadow-medium: var(--shadow-medium);
+$shadow-strong: var(--shadow-strong);
+
+$transition-smooth: var(--transition-smooth);
+$transition-fast: var(--transition-fast);
+
+$border-radius-small: var(--border-radius-small);
+$border-radius-medium: var(--border-radius-medium);
+$border-radius-large: var(--border-radius-large);
+
+$gradient-primary: var(--gradient-primary);
+$gradient-secondary: var(--gradient-secondary);
+$gradient-warm: var(--gradient-warm);

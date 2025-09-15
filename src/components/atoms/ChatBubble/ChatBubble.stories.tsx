@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ChatBubble from "./ChatBubble";
+import { ChatBubble } from "../../../globals";
 
 const meta: Meta<typeof ChatBubble> = {
 	title: "Atoms/ChatBubble",

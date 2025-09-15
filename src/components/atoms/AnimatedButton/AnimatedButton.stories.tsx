@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AnimatedButton from "./AnimatedButton";
+import { AnimatedButton } from "../../../globals";
 
 const meta: Meta<typeof AnimatedButton> = {
 	title: "Atoms/AnimatedButton",

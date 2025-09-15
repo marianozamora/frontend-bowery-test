@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import ChatBubble from "./ChatBubble";
+import { ChatBubble } from "../../../globals";
 
 describe("ChatBubble", () => {
 	beforeEach(() => {

@@ -187,13 +187,13 @@
 	background: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
-	box-shadow: $shadow-lg;
+	box-shadow: var(--shadow-lg);
 }
 
 // Focus Styles
 @mixin focus-visible {
 	&:focus-visible {
-		outline: 2px solid $color-accent-blue;
-		outline-offset: 2px;
+		outline: 0.125rem solid var(--color-accent-blue);
+		outline-offset: 0.125rem;
 	}
 }

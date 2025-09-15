@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import TypingIndicator from "./TypingIndicator";
+import { TypingIndicator } from "../../../globals";
 
 const meta: Meta<typeof TypingIndicator> = {
 	title: "Atoms/TypingIndicator",

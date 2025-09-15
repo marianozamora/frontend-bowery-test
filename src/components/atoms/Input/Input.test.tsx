@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import Input from "./Input";
+import { Input } from "../../../globals";
 
 // Component wrapper to handle state for testing
 const InputWrapper = ({

@@ -1,9 +1,5 @@
 import React, { useState, useCallback, memo, useMemo } from "react";
-import ChatBubble from "../atoms/ChatBubble";
-import TypingIndicator from "../atoms/TypingIndicator";
-import Input from "../atoms/Input";
-import { useStreamingMessages } from "../../hooks/useStreamingMessages";
-import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { ChatBubble, TypingIndicator, Input, useStreamingMessages, useAutoScroll } from "../../globals";
 import styles from "./ChatContainer.module.scss";
 
 interface ChatContainerProps {

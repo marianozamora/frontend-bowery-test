@@ -2,11 +2,11 @@
 // MAIN STYLES ENTRY POINT
 // ========================================
 
-// Import order matters!
-@import "colors";
-@import "typography";
-@import "spacing";
-@import "mixins";
+// Use modern Sass syntax instead of deprecated @import
+@use "colors";
+@use "typography";
+@use "spacing";
+@use "mixins";
 
 // Global Reset and Base Styles
 *,
@@ -23,11 +23,11 @@ html {
 }
 
 body {
-	font-family: $font-primary;
-	font-size: $font-size-base;
-	line-height: $line-height-normal;
-	color: $color-primary-100;
-	background: $color-primary-900;
+	font-family: var(--font-primary);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	color: var(--color-primary-100);
+	background: var(--color-primary-900);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -46,7 +46,7 @@ body {
 
 // Focus styles for accessibility
 *:focus-visible {
-	@include focus-visible;
+	@include mixins.focus-visible;
 }
 
 // Remove focus outline for mouse users
@@ -73,35 +73,35 @@ body {
 }
 
 .flex-center {
-	@include flex-center;
+	@include mixins.flex-center;
 }
 
 .flex-between {
-	@include flex-between;
+	@include mixins.flex-between;
 }
 
 .flex-column {
-	@include flex-column;
+	@include mixins.flex-column;
 }
 
 .text-truncate {
-	@include text-truncate;
+	@include mixins.text-truncate;
 }
 
 // Scrollbar styling
 ::-webkit-scrollbar {
-	width: 6px;
+	width: 0.375rem;
 }
 
 ::-webkit-scrollbar-track {
-	background: $color-primary-800;
+	background: var(--color-primary-800);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: $color-primary-600;
-	border-radius: $radius-full;
+	background: var(--color-primary-600);
+	border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: $color-primary-500;
+	background: var(--color-primary-500);
 }

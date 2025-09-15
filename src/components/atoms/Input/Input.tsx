@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from "react";
-import AnimatedButton from "./AnimatedButton";
+import { AnimatedButton } from "../../../globals";
 import styles from "./Input.module.scss";
 
 export interface InputProps {

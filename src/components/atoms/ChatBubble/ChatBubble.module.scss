@@ -1,26 +1,38 @@
 .bubble {
-	padding: 14px 18px;
-	border-radius: 20px;
-	margin: 10px 0;
-	max-width: 85%;
+	// Component Variables
+	--bubble-padding-y: 0.875rem;
+	--bubble-padding-x: 1.125rem;
+	--bubble-radius: 1.25rem;
+	--bubble-margin: 0.625rem;
+	--bubble-max-width: 85%;
+	--bubble-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	--bubble-hover-translate: -0.1875rem;
+	--bubble-hover-scale: 1.02;
+	--bubble-blur: 0.625rem;
+	--bubble-before-inset: -0.125rem;
+
+	padding: var(--bubble-padding-y) var(--bubble-padding-x);
+	border-radius: var(--bubble-radius);
+	margin: var(--bubble-margin) 0;
+	max-width: var(--bubble-max-width);
 	font-size: 1rem;
 	word-break: break-word;
-	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: var(--bubble-transition);
 	transform: translateY(0);
 	opacity: 1;
 	animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(var(--bubble-blur));
 
 	&:hover {
-		transform: translateY(-3px) scale(1.02);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+		transform: translateY(var(--bubble-hover-translate)) scale(var(--bubble-hover-scale));
+		box-shadow: 0 0.5rem 1.5625rem rgba(0, 0, 0, 0.3);
 	}
 
 	&::before {
 		content: "";
 		position: absolute;
-		inset: -2px;
+		inset: var(--bubble-before-inset);
 		border-radius: inherit;
 		background: linear-gradient(
 			45deg,
@@ -46,7 +58,7 @@
 .cursor {
 	display: inline-block;
 	animation: blink 1s infinite;
-	margin-left: 2px;
+	margin-left: 0.125rem;
 	color: currentColor;
 	font-weight: bold;
 }
@@ -65,19 +77,19 @@
 .errorContainer {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	margin-top: 8px;
-	padding-top: 8px;
-	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
 }
 
 .retryButton {
 	background: none;
 	border: none;
 	cursor: pointer;
-	font-size: 14px;
-	padding: 4px;
-	border-radius: 4px;
+	font-size: 0.875rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
 	transition: background-color 0.2s ease;
 
 	&:hover {
@@ -85,8 +97,8 @@
 	}
 
 	&:focus {
-		outline: 2px solid #fff;
-		outline-offset: 2px;
+		outline: 0.125rem solid #fff;
+		outline-offset: 0.125rem;
 	}
 }
 .user {
@@ -94,38 +106,38 @@
 	color: #fff;
 	align-self: flex-end;
 	transform-origin: bottom right;
-	box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+	box-shadow: 0 0.25rem 0.9375rem rgba(0, 123, 255, 0.3);
 
 	&::after {
 		content: "";
 		position: absolute;
-		bottom: -8px;
-		right: 12px;
+		bottom: -0.5rem;
+		right: 0.75rem;
 		width: 0;
 		height: 0;
-		border-left: 8px solid transparent;
-		border-right: 8px solid transparent;
-		border-top: 8px solid #0056b3;
+		border-left: 0.5rem solid transparent;
+		border-right: 0.5rem solid transparent;
+		border-top: 0.5rem solid #0056b3;
 	}
 }
 .assistant {
 	background: rgba(34, 34, 34, 0.95);
 	color: #ffd700;
 	align-self: flex-start;
-	border: 1px solid rgba(255, 215, 0, 0.4);
+	border: 0.0625rem solid rgba(255, 215, 0, 0.4);
 	transform-origin: bottom left;
-	box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+	box-shadow: 0 0.25rem 0.9375rem rgba(255, 215, 0, 0.2);
 
 	&::after {
 		content: "";
 		position: absolute;
-		bottom: -8px;
-		left: 12px;
+		bottom: -0.5rem;
+		left: 0.75rem;
 		width: 0;
 		height: 0;
-		border-left: 8px solid transparent;
-		border-right: 8px solid transparent;
-		border-top: 8px solid rgba(34, 34, 34, 0.95);
+		border-left: 0.5rem solid transparent;
+		border-right: 0.5rem solid transparent;
+		border-top: 0.5rem solid rgba(34, 34, 34, 0.95);
 	}
 }
 .streaming {
@@ -133,19 +145,19 @@
 	animation: typing 1.5s infinite;
 }
 .error {
-	border: 1px solid #ff4d4f;
+	border: 0.0625rem solid #ff4d4f;
 	animation: shake 0.5s ease-in-out;
 }
 .errorText {
 	color: #ff4d4f;
-	font-size: 0.85em;
-	margin-left: 8px;
+	font-size: 0.85rem;
+	margin-left: 0.5rem;
 }
 
 @keyframes slideIn {
 	from {
 		opacity: 0;
-		transform: translateY(30px) scale(0.8) rotateX(20deg);
+		transform: translateY(1.875rem) scale(0.8) rotateX(20deg);
 	}
 	to {
 		opacity: 1;
@@ -177,22 +189,22 @@
 	50%,
 	70%,
 	90% {
-		transform: translateX(-3px) rotateZ(-1deg);
+		transform: translateX(-0.1875rem) rotateZ(-1deg);
 	}
 	20%,
 	40%,
 	60%,
 	80% {
-		transform: translateX(3px) rotateZ(1deg);
+		transform: translateX(0.1875rem) rotateZ(1deg);
 	}
 }
 
 @keyframes glow {
 	0%,
 	100% {
-		box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+		box-shadow: 0 0 0.3125rem rgba(255, 215, 0, 0.3);
 	}
 	50% {
-		box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+		box-shadow: 0 0 1.25rem rgba(255, 215, 0, 0.6);
 	}
 }

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import TypingIndicator from "./TypingIndicator";
+import { TypingIndicator } from "../../../globals";
 
 describe("TypingIndicator", () => {
 	it("should render the typing indicator", () => {

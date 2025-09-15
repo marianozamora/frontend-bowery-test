@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
+	ChatContainer,
 	MicIcon,
 	ChatIcon,
 	InsightsIcon,
 	ExploreIcon,
 	IrisIcon,
 	TypeIcon,
-} from "../atoms/Icons";
-import ChatContainer from "./ChatContainer";
+} from "../../globals";
 import styles from "./IrisInterface.module.scss";
 
 const IrisInterface: React.FC = () => {

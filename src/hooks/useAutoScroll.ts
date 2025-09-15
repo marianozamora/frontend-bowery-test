@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 interface UseAutoScrollProps {
 	dependency?: any; // Variable que dispara el scroll
